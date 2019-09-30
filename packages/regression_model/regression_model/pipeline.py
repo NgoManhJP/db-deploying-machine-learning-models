@@ -2,7 +2,8 @@ from sklearn.linear_model import Lasso
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 
-import preprocessors as pp
+# import preprocessors as pp
+from regression_model import preprocessors as pp
 
 
 # 学習データ内のNAを持つカテゴリ変数
@@ -38,7 +39,7 @@ price_pipe = Pipeline(
         ('temporal_variable',
             pp.TemporalVariableEstimator(
                 variables=TEMPORAL_VARS,
-                reference_variable=TEMPORAL_VARS)),
+                reference_variable=DROP_FEATURES)),
         ('rare_label_encoder',
             pp.RareLabelCategoricalEncoder(
                 tol=0.01,
