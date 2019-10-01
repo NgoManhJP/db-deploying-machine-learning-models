@@ -14,12 +14,12 @@ class CategoricalImputer(BaseEstimator, TransformerMixin):
 
     def fit(self, X: pd.DataFrame, y: pd.Series = None
             ) -> 'CategoricalImputer':
-        """sklearnパイプラインに対応するステートメントを適合する。"""
+        """sklearnパイプラインに対応するためのステートメントを適合させます。"""
 
         return self
 
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
-        """変換を対象データフレームに適用する。"""
+        """変換をデータフレームに適用します。"""
 
         X = X.copy()
         for feature in self.variables:
@@ -27,8 +27,9 @@ class CategoricalImputer(BaseEstimator, TransformerMixin):
 
         return X
 
+
 class NumericalImputer(BaseEstimator, TransformerMixin):
-    """数値欠損値の対応"""
+    """imputerで数値欠損値の処理"""
 
     def __init__(self, variables=None):
         if not isinstance(variables, list):
@@ -88,7 +89,7 @@ class RareLabelCategoricalEncoder(BaseEstimator, TransformerMixin):
         self.encoder_dict_ = {}
 
         for var in self.variables:
-            # エンコーダーは最も頻繁なカテゴリーを学習
+            # エンコーダーは最も頻繁なカテゴリーを学習します
             t = pd.Series(X[var].value_counts() / np.float(len(X)))
             # 頻繁なラベル:
             self.encoder_dict_[var] = list(t[t >= self.tol].index)
@@ -117,7 +118,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
         temp = pd.concat([X, y], axis=1)
         temp.columns = list(X.columns) + ['target']
 
-        # 変換辞書の永続化
+        # persist transforming dictionary
         self.encoder_dict_ = {}
 
         for var in self.variables:
@@ -146,7 +147,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
 
 
 class LogTransformer(BaseEstimator, TransformerMixin):
-    """対数変換器。"""
+    """対数変換器"""
 
     def __init__(self, variables=None):
         if not isinstance(variables, list):
@@ -188,4 +189,3 @@ class DropUnecessaryFeatures(BaseEstimator, TransformerMixin):
         X = X.drop(self.variables, axis=1)
 
         return X
-
