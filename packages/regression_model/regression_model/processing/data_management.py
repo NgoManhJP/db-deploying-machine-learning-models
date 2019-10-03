@@ -18,15 +18,13 @@ def load_dataset(*, file_name: str
 
 
 def save_pipeline(*, pipeline_to_persist) -> None:
-    """パイプラインを保存する。"""
-
-    Saves the versioned model, and overwrites any previous
-    saved models. This ensures that when the package is
-    published, there is only one trained model that can be
-    called, and we know exactly how it was built.
+    """パイプラインを保存
+    バージョン管理されたモデルを保存し、以前に保存されたモデルを上書きします。
+    これにより、パッケージが公開されたときに、呼び出せるトレーニング済みモデルが1つだけになり、
+    そのビルド方法が正確にわかります。
     """
 
-    # Prepare versioned save file name
+    # バージョン管理された保存ファイル名を準備する
     save_file_name = f'{config.PIPELINE_SAVE_FILE}{_version}.pkl'
     save_path = config.TRAINED_MODEL_DIR / save_file_name
 
@@ -37,7 +35,7 @@ def save_pipeline(*, pipeline_to_persist) -> None:
 
 def load_pipeline(*, file_name: str
                   ) -> Pipeline:
-    """保存されたパイプラインをロードする。"""
+    """保存されたパイプラインをロード"""
 
     file_path = config.TRAINED_MODEL_DIR / file_name
     trained_model = joblib.load(filename=file_path)
@@ -46,10 +44,9 @@ def load_pipeline(*, file_name: str
 
 def remove_old_pipelines(*, files_to_keep) -> None:
     """
-    Remove old model pipelines.
-    This is to ensure there is a simple one-to-one
-    mapping between the package version and the model
-    version to be imported and used by other applications.
+    古いモデルのパイプラインを削除。
+    これは、他のアプリケーションによってインポートおよび使用されるパッケージバージョンとモデルバージョンの間に
+    単純な1対1のマッピングがあることを確認するためです。
     """
 
     for model_file in config.TRAINED_MODEL_DIR.iterdir():

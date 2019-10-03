@@ -5,10 +5,8 @@ import sys
 
 from regression_model.config import config
 
-# Multiple calls to logging.getLogger('someLogger') return a
-# reference to the same logger object.  This is true not only
-# within the same module, but also across modules as long as
-# it is in the same Python interpreter process.
+# logging.getLogger（ 'someLogger'）を複数回呼び出すと、同じロガーオブジェクトへの参照が返されます。
+# これは、同じモジュール内だけでなく、同じPythonインタープリタープロセス内にある限り、モジュール間でも同様です。
 
 FORMATTER = logging.Formatter(
     "%(asctime)s — %(name)s — %(levelname)s —"

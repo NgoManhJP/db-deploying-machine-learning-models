@@ -5,7 +5,7 @@ from regression_model.processing.errors import InvalidModelInputError
 
 
 class LogTransformer(BaseEstimator, TransformerMixin):
-    """Logarithm transformer."""
+    """対数変換器。"""
 
     def __init__(self, variables=None):
         if not isinstance(variables, list):
@@ -14,13 +14,13 @@ class LogTransformer(BaseEstimator, TransformerMixin):
             self.variables = variables
 
     def fit(self, X, y=None):
-        # to accomodate the pipeline
+        # パイプラインに対応するため
         return self
 
     def transform(self, X):
         X = X.copy()
 
-        # check that the values are non-negative for log transform
+        # 対数変換の値が負でないことを確認
         if not (X[self.variables] > 0).all().all():
             vars_ = self.variables[(X[self.variables] <= 0).any()]
             raise InvalidModelInputError(
