@@ -17,22 +17,19 @@ AUTHOR = 'Your name'
 REQUIRES_PYTHON = '>=3.6.0'
 
 
-# What packages are required for this module to be executed?
+# このモジュールを実行するために必要なパッケージ?
 def list_reqs(fname='requirements.txt'):
     with open(fname) as fd:
         return fd.read().splitlines()
 
 
-# The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
-# Except, perhaps the License and Trove Classifiers!
-# If you do change the License, remember to change the
-# Trove Classifier for that!
+# ライセンスを変更する場合は、Trove Classifierを忘れずに変更！
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-# Import the README and use it as the long-description.
-# Note: this will only work if 'README.md' is present in your MANIFEST.in file!
+# READMEをインポートし、長い説明として使用します。
+# 注：これは、MANIFEST.inファイルに「README.md」が存在する場合にのみ機能します！
 try:
     with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
         long_description = '\n' + f.read()
@@ -40,7 +37,7 @@ except FileNotFoundError:
     long_description = DESCRIPTION
 
 
-# Load the package's __version__.py module as a dictionary.
+# パッケージの__version__.pyモジュールを辞書としてロードします。
 ROOT_DIR = Path(__file__).resolve().parent
 PACKAGE_DIR = ROOT_DIR / NAME
 about = {}
@@ -49,7 +46,6 @@ with open(PACKAGE_DIR / 'VERSION') as f:
     about['__version__'] = _version
 
 
-# Where the magic happens:
 setup(
     name=NAME,
     version=about['__version__'],
@@ -67,7 +63,7 @@ setup(
     include_package_data=True,
     license='MIT',
     classifiers=[
-        # Trove classifiers
+        # Trove分類子
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
